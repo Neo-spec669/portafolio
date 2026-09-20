@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Desarrollo | SharePoint Mockup</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET Y VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        :root {
+            --bg-dark: #12121a;
+            --bg-card: #1e1e2d;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --accent-cyan: #00d2ff;
+            --accent-blue: #3a7bd5;
+            --border-color: #2a2a3e;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- NAVBAR (Barra Superior) --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: rgba(18, 18, 26, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo i { color: var(--accent-cyan); }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-cyan);
+        }
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .nav-icons i:hover { color: var(--text-main); }
+
+        /* --- HERO SECTION (Portada de Impacto) --- */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            background: linear-gradient(135deg, rgba(18,18,26,0.9) 0%, rgba(18,18,26,0.7) 100%), 
+                        url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1920&auto=format&fit=crop') center/cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero-content {
+            max-width: 800px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid var(--border-color);
+        }
+        .btn-secondary:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        /* --- SECCIONES GENERALES --- */
+        section {
+            padding: 5rem 5%;
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* --- PROYECTOS DESTACADOS (Cards) --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            border-color: var(--accent-cyan);
+        }
+        .card-img {
+            height: 200px;
+            background-color: #2a2a3e;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .card-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 50%;
+            background: linear-gradient(to top, var(--bg-card), transparent);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .card-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .tag {
+            background-color: rgba(0, 210, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .card-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+        .card-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* --- STACK TECNOLÓGICO --- */
+        .stack-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .stack-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .stack-item:hover {
+            color: var(--accent-cyan);
+        }
+        .stack-item i {
+            font-size: 3rem;
+        }
+
+        /* --- ÚLTIMAS ACTUALIZACIONES (Noticias) --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        .news-card {
+            display: flex;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+        .news-card:hover {
+            border-color: var(--accent-cyan);
+        }
+        .news-img {
+            width: 150px;
+            background-color: #2a2a3e;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+        .news-content {
+            padding: 1.5rem;
+        }
+        .news-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .news-content span {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* En móvil se oculta el menú por simplicidad */
+            .news-grid { grid-template-columns: 1fr; }
+            .news-card { flex-direction: column; }
+            .news-img { width: 100%; height: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-code"></i> Mi Portafolio
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Inicio</a></li>
+            <li><a href="#">Mis Desarrollos</a></li>
+            <li><a href="#">Sobre Mí</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Transformando ideas en soluciones digitales</h1>
+            <p>Portafolio de Desarrollo e Innovación. Explora mis últimos proyectos, aplicaciones y soluciones tecnológicas creadas para resolver problemas reales.</p>
+            <div class="btn-group">
+                <button class="btn btn-primary">Explorar Proyectos</button>
+                <button class="btn btn-secondary">Contactar</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROYECTOS DESTACADOS -->
+    <section id="projects">
+        <h2 class="section-title">Proyectos Destacados</h2>
+        <div class="projects-grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="card-body">
+                    <h3>Sistema de Gestión Interna</h3>
+                    <div class="tags">
+                        <span class="tag">Power Apps</span>
+                        <span class="tag">SQL Server</span>
+                        <span class="tag">SharePoint</span>
+                    </div>
+                    <a href="#" class="card-link">Ver Detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="card-body">
+                    <h3>App de Ventas Móvil</h3>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                    <a href="#" class="card-link">Ver Detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="card-body">
+                    <h3>Dashboard Financiero</h3>
+                    <div class="tags">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">DAX</span>
+                    </div>
+                    <a href="#" class="card-link">Ver Detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STACK TECNOLÓGICO -->
+    <section id="stack" style="background-color: rgba(30, 30, 45, 0.3);">
+        <h2 class="section-title">Mi Stack Tecnológico</h2>
+        <div class="stack-container">
+            <div class="stack-item">
+                <i class="fab fa-microsoft"></i>
+                <span>Power Platform</span>
+            </div>
+            <div class="stack-item">
+                <i class="fab fa-react"></i>
+                <span>React</span>
+            </div>
+            <div class="stack-item">
+                <i class="fab fa-python"></i>
+                <span>Python</span>
+            </div>
+            <div class="stack-item">
+                <i class="fas fa-database"></i>
+                <span>SQL</span>
+            </div>
+            <div class="stack-item">
+                <i class="fab fa-js"></i>
+                <span>JavaScript</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÚLTIMAS ACTUALIZACIONES -->
+    <section id="news">
+        <h2 class="section-title">Últimas Actualizaciones</h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="news-content">
+                    <h4>Nueva versión de mi App de Ventas</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">He implementado un nuevo módulo de reportes en tiempo real...</p>
+                    <span>Hace 2 días</span>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop');"></div>
+                <div class="news-content">
+                    <h4>Migración exitosa a la nube</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">Todos mis proyectos ahora corren sobre infraestructura de Azure...</p>
+                    <span>Hace 1 semana</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Mi Portafolio de Desarrollo. Creado con SharePoint y pasión por el código.</p>
+    </footer>
+
+</body>
+</html>
