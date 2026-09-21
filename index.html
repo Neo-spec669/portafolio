@@ -1,433 +1,288 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Desarrollo | SharePoint Mockup</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        /* --- RESET Y VARIABLES --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-        :root {
-            --bg-dark: #12121a;
-            --bg-card: #1e1e2d;
-            --text-main: #ffffff;
-            --text-muted: #a0a0b0;
-            --accent-cyan: #00d2ff;
-            --accent-blue: #3a7bd5;
-            --border-color: #2a2a3e;
-        }
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Centro de herramientas</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c111d;
+    --panel:#131a2b;
+    --line:#27324b;
+    --text:#eef2fb;
+    --muted:#9aa7c4;
+    --cyan:#34d3ff;
+    --blue:#4f80f5;
+    --amber:#ffb347;
+    --display:'Bricolage Grotesque','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--ink);color:var(--text);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
 
-        /* --- NAVBAR (Barra Superior) --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            background-color: rgba(18, 18, 26, 0.9);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo i { color: var(--accent-cyan); }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-cyan);
-        }
-        .nav-icons {
-            display: flex;
-            gap: 1.5rem;
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-        .nav-icons i:hover { color: var(--text-main); }
+  /* Página: altura mínima fija para que el iframe de SharePoint mida siempre lo mismo en escritorio */
+  .page{
+    position:relative;min-height:760px;display:flex;flex-direction:column;overflow:hidden;
+    background:
+      radial-gradient(900px 520px at 78% 46%, rgba(52,211,255,.10), transparent 62%),
+      radial-gradient(640px 420px at 6% 100%, rgba(79,128,245,.10), transparent 60%),
+      var(--ink);
+  }
+  .page::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(rgba(154,167,196,.16) 1px, transparent 1.2px);
+    background-size:26px 26px;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 28%,#000 72%,transparent);
+            mask-image:linear-gradient(180deg,transparent,#000 28%,#000 72%,transparent);
+  }
 
-        /* --- HERO SECTION (Portada de Impacto) --- */
-        .hero {
-            position: relative;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            background: linear-gradient(135deg, rgba(18,18,26,0.9) 0%, rgba(18,18,26,0.7) 100%), 
-                        url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1920&auto=format&fit=crop') center/cover;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .hero-content {
-            max-width: 800px;
-        }
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, #fff, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-        }
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-        }
-        .btn-primary {
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
-        }
-        .btn-secondary {
-            background: transparent;
-            color: #fff;
-            border: 2px solid var(--border-color);
-        }
-        .btn-secondary:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-        }
+  /* Barra superior (sin enlaces: no hay a dónde ir desde aquí) */
+  .top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:24px 5%}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+  .mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:20px;height:20px}
+  .mark i{border-radius:3px;background:linear-gradient(135deg,var(--cyan),var(--blue))}
+  .mark i.a{background:var(--amber)}
+  .tag{color:var(--muted);font-size:.9rem}
 
-        /* --- SECCIONES GENERALES --- */
-        section {
-            padding: 5rem 5%;
-        }
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2.5rem;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border-color);
-        }
+  /* Hero */
+  .hero{
+    position:relative;z-index:1;flex:1;display:grid;
+    grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);
+    align-items:center;gap:4vw;padding:8px 5% 96px;
+  }
+  h1{
+    font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.04;
+    font-size:clamp(2.3rem,4.1vw,3.7rem);max-width:15em;text-wrap:balance;
+  }
+  .lead{margin-top:24px;max-width:34em;color:var(--muted);font-size:1.125rem;line-height:1.65}
+  .replay{
+    margin-top:32px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+    padding:12px 20px;border-radius:999px;border:1px solid var(--line);
+    background:rgba(255,255,255,.03);color:var(--text);font:600 .95rem var(--body);
+    transition:border-color .2s, background .2s;
+  }
+  .replay:hover{border-color:var(--cyan);background:rgba(52,211,255,.07)}
+  .replay:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  .replay:disabled{opacity:.55;cursor:default}
+  .replay svg{width:16px;height:16px}
 
-        /* --- PROYECTOS DESTACADOS (Cards) --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .card {
-            background-color: var(--bg-card);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-            border-color: var(--accent-cyan);
-        }
-        .card-img {
-            height: 200px;
-            background-color: #2a2a3e;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        .card-img::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 50%;
-            background: linear-gradient(to top, var(--bg-card), transparent);
-        }
-        .card-body {
-            padding: 1.5rem;
-        }
-        .card-body h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        .tags {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .tag {
-            background-color: rgba(0, 210, 255, 0.1);
-            color: var(--accent-cyan);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .card-link {
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s;
-        }
-        .card-link:hover {
-            color: var(--accent-cyan);
-        }
+  /* Escenario: el desorden (ámbar) se convierte en un tablero ordenado (azules) */
+  .stage{position:relative;width:100%;max-width:640px;aspect-ratio:6/5;margin-left:auto}
+  .frame{
+    position:absolute;inset:0;border-radius:16px;border:1px solid var(--line);
+    background:linear-gradient(180deg,#141c2f,#101728);
+    box-shadow:0 40px 90px -24px rgba(0,0,0,.65);
+  }
+  .frame::before{content:"";position:absolute;left:0;right:0;top:0;height:9%;border-bottom:1px solid var(--line)}
+  .dots{position:absolute;left:3.6%;top:3.4%;width:8px;height:8px;border-radius:50%;background:#3a4767;box-shadow:14px 0 #3a4767,28px 0 #3a4767}
 
-        /* --- STACK TECNOLÓGICO --- */
-        .stack-container {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .stack-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-muted);
-            transition: color 0.3s;
-        }
-        .stack-item:hover {
-            color: var(--accent-cyan);
-        }
-        .stack-item i {
-            font-size: 3rem;
-        }
+  .p{
+    position:absolute;border-radius:6px;background:var(--amber);transform-origin:center;
+    transition:transform .95s cubic-bezier(.22,.9,.24,1), background-color .7s ease, opacity .6s ease;
+    will-change:transform;
+  }
+  .stage.init .p{transition:none !important}
+  .settled .p{background:var(--fin)}
+  .kpi,.chartbg{box-shadow:inset 0 0 0 1px var(--line)}
 
-        /* --- ÚLTIMAS ACTUALIZACIONES (Noticias) --- */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-        .news-card {
-            display: flex;
-            background-color: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: border-color 0.3s;
-        }
-        .news-card:hover {
-            border-color: var(--accent-cyan);
-        }
-        .news-img {
-            width: 150px;
-            background-color: #2a2a3e;
-            background-size: cover;
-            background-position: center;
-            flex-shrink: 0;
-        }
-        .news-content {
-            padding: 1.5rem;
-        }
-        .news-content h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        .news-content span {
-            font-size: 0.8rem;
-            color: var(--accent-cyan);
-        }
+  /* Detalle interno de las tarjetas: líneas que sugieren etiqueta y valor */
+  .kpi::before,.kpi::after{content:"";position:absolute;left:10%;border-radius:3px;opacity:0}
+  .kpi::before{top:24%;width:34%;height:9%;background:rgba(154,167,196,.5)}
+  .kpi::after{top:52%;width:var(--v);height:20%;background:var(--cyan)}
+  .settled .kpi::before,.settled .kpi::after{opacity:1;transition:opacity .5s .8s}
 
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+  /* Barras de avance */
+  .p i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:inherit;background:var(--cyan)}
+  .settled .p i{width:var(--pw);transition:width .9s .6s cubic-bezier(.22,.9,.24,1)}
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* En móvil se oculta el menú por simplicidad */
-            .news-grid { grid-template-columns: 1fr; }
-            .news-card { flex-direction: column; }
-            .news-img { width: 100%; height: 150px; }
-        }
-    </style>
+  /* Línea de tendencia (la única señal en ámbar dentro del orden) */
+  .trend{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  #trend{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+  .settled #trend{stroke-dashoffset:0;transition:stroke-dashoffset 1.3s ease 1s}
+  .dot{
+    position:absolute;width:11px;height:11px;border-radius:50%;background:var(--amber);
+    box-shadow:0 0 0 5px rgba(255,179,71,.22);transform:translate(-50%,-50%) scale(0);
+  }
+  .settled .dot{transform:translate(-50%,-50%) scale(1);transition:transform .4s ease 2.15s}
+
+  /* Indicador para seguir bajando (las herramientas están debajo, en SharePoint) */
+  .cue{
+    position:absolute;left:0;right:0;bottom:22px;z-index:2;pointer-events:none;
+    display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:.9rem;
+  }
+  .cue svg{width:22px;height:22px;stroke:var(--cyan);animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;gap:36px;padding-bottom:110px}
+    .stage{max-width:520px;margin:0 auto}
+    .tag{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .p,.p i,#trend,.dot,.kpi::before,.kpi::after{transition:none !important}
+    .cue svg{animation:none}
+  }
+</style>
 </head>
 <body>
+<div class="page">
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i class="a"></i></span>
+      <span>Centro de herramientas</span>
+    </div>
+    <span class="tag">Desarrollo e innovación</span>
+  </header>
 
-    <!-- NAVBAR -->
-    <nav>
-        <div class="logo">
-            <i class="fas fa-code"></i> Mi Portafolio
-        </div>
-        <ul class="nav-links">
-            <li><a href="#" class="active">Inicio</a></li>
-            <li><a href="#">Mis Desarrollos</a></li>
-            <li><a href="#">Sobre Mí</a></li>
-            <li><a href="#">Contacto</a></li>
-        </ul>
-        <div class="nav-icons">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-user-circle"></i>
-        </div>
-    </nav>
+  <main class="hero">
+    <div class="copy">
+      <h1>Automatizo lo repetitivo para que tú te enfoques en decidir.</h1>
+      <p class="lead">Explora las herramientas que desarrollo para reducir errores, evitar la captura manual y trabajar con mejores datos.</p>
+      <button class="replay" id="replay" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        Ver cómo se ordena
+      </button>
+    </div>
 
-    <!-- HERO SECTION -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Transformando ideas en soluciones digitales</h1>
-            <p>Portafolio de Desarrollo e Innovación. Explora mis últimos proyectos, aplicaciones y soluciones tecnológicas creadas para resolver problemas reales.</p>
-            <div class="btn-group">
-                <button class="btn btn-primary">Explorar Proyectos</button>
-                <button class="btn btn-secondary">Contactar</button>
-            </div>
-        </div>
-    </header>
+    <div class="stage init" id="stage" aria-hidden="true">
+      <div class="frame"><span class="dots"></span></div>
+      <svg class="trend" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet">
+        <path id="trend" pathLength="1" d=""/>
+      </svg>
+      <span class="dot" id="dot"></span>
+    </div>
+  </main>
 
-    <!-- PROYECTOS DESTACADOS -->
-    <section id="projects">
-        <h2 class="section-title">Proyectos Destacados</h2>
-        <div class="projects-grid">
-            <!-- Card 1 -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop');"></div>
-                <div class="card-body">
-                    <h3>Sistema de Gestión Interna</h3>
-                    <div class="tags">
-                        <span class="tag">Power Apps</span>
-                        <span class="tag">SQL Server</span>
-                        <span class="tag">SharePoint</span>
-                    </div>
-                    <a href="#" class="card-link">Ver Detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop');"></div>
-                <div class="card-body">
-                    <h3>App de Ventas Móvil</h3>
-                    <div class="tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">MongoDB</span>
-                    </div>
-                    <a href="#" class="card-link">Ver Detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop');"></div>
-                <div class="card-body">
-                    <h3>Dashboard Financiero</h3>
-                    <div class="tags">
-                        <span class="tag">Power BI</span>
-                        <span class="tag">Azure</span>
-                        <span class="tag">DAX</span>
-                    </div>
-                    <a href="#" class="card-link">Ver Detalles <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="cue">
+    <span>Las herramientas están justo debajo</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</div>
 
-    <!-- STACK TECNOLÓGICO -->
-    <section id="stack" style="background-color: rgba(30, 30, 45, 0.3);">
-        <h2 class="section-title">Mi Stack Tecnológico</h2>
-        <div class="stack-container">
-            <div class="stack-item">
-                <i class="fab fa-microsoft"></i>
-                <span>Power Platform</span>
-            </div>
-            <div class="stack-item">
-                <i class="fab fa-react"></i>
-                <span>React</span>
-            </div>
-            <div class="stack-item">
-                <i class="fab fa-python"></i>
-                <span>Python</span>
-            </div>
-            <div class="stack-item">
-                <i class="fas fa-database"></i>
-                <span>SQL</span>
-            </div>
-            <div class="stack-item">
-                <i class="fab fa-js"></i>
-                <span>JavaScript</span>
-            </div>
-        </div>
-    </section>
+<script>
+(function(){
+  var stage = document.getElementById('stage');
+  var trend = document.getElementById('trend');
+  var dot   = document.getElementById('dot');
+  var btn   = document.getElementById('replay');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pieces = [];
+  var busy = false;
 
-    <!-- ÚLTIMAS ACTUALIZACIONES -->
-    <section id="news">
-        <h2 class="section-title">Últimas Actualizaciones</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop');"></div>
-                <div class="news-content">
-                    <h4>Nueva versión de mi App de Ventas</h4>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">He implementado un nuevo módulo de reportes en tiempo real...</p>
-                    <span>Hace 2 días</span>
-                </div>
-            </div>
-            <div class="news-card">
-                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop');"></div>
-                <div class="news-content">
-                    <h4>Migración exitosa a la nube</h4>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">Todos mis proyectos ahora corren sobre infraestructura de Azure...</p>
-                    <span>Hace 1 semana</span>
-                </div>
-            </div>
-        </div>
-    </section>
+  function rand(a,b){ return a + Math.random()*(b-a); }
 
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 Mi Portafolio de Desarrollo. Creado con SharePoint y pasión por el código.</p>
-    </footer>
+  function add(o){
+    var el = document.createElement('div');
+    el.className = 'p ' + (o.cls || '');
+    el.style.left = o.x + '%';
+    el.style.top = o.y + '%';
+    el.style.width = o.w + '%';
+    el.style.height = o.h + '%';
+    el.style.setProperty('--fin', o.fin || '#2a3651');
+    if (o.v)  el.style.setProperty('--v', o.v);
+    if (o.r)  el.style.borderRadius = o.r;
+    if (o.pw != null){
+      var i = document.createElement('i');
+      i.style.setProperty('--pw', o.pw + '%');
+      el.appendChild(i);
+    }
+    stage.insertBefore(el, stage.querySelector('.trend'));
+    pieces.push({el:el, o:o});
+  }
 
+  /* --- Composición del tablero final (coordenadas en % del escenario) --- */
+  var kv = ['58%','72%','44%'];
+  for (var k=0;k<3;k++) add({cls:'kpi', x:4+k*31.4, y:15, w:29.2, h:17, fin:'#1b2540', v:kv[k], r:'10px'});
+
+  add({cls:'chartbg', x:4, y:35, w:58, h:37, fin:'#151d31', r:'10px'});
+
+  var H = [9,14,12,19,16,23,20,26];
+  var barColors = ['#3e6be0','#4574ec','#4f80f5','#4a8df3','#41a2f6','#38b8fb','#34c9ff','#7fe3ff'];
+  var pts = [];
+  for (var b=0;b<H.length;b++){
+    var bx = 7 + b*6.6;
+    add({cls:'bar', x:bx, y:69-H[b], w:4.6, h:H[b], fin:barColors[b], r:'4px 4px 2px 2px'});
+    pts.push([bx+2.3, 69-H[b]-5]);
+  }
+
+  var pr = [82,64,91,47];
+  for (var q=0;q<4;q++) add({cls:'track', x:66, y:39+q*9, w:30, h:4.2, fin:'#26314b', pw:pr[q], r:'999px'});
+
+  var rows = [77,84,91];
+  var status = ['#1f8fb0','#3b5fc0','#3a7fd0'];
+  for (var r=0;r<3;r++){
+    add({cls:'cell', x:4,  y:rows[r], w:19, h:5, fin:'#334162'});
+    add({cls:'cell', x:25, y:rows[r], w:31, h:5, fin:'#2a3651'});
+    add({cls:'cell', x:58, y:rows[r], w:18, h:5, fin:'#2a3651'});
+    add({cls:'cell', x:78, y:rows[r], w:18, h:5, fin:status[r], r:'999px'});
+  }
+
+  /* Fichas sueltas: son el "ruido" que desaparece al ordenar */
+  for (var s=0;s<10;s++) add({cls:'stray', x:rand(4,88), y:rand(12,88), w:rand(5,12), h:rand(3,6)});
+
+  /* Línea de tendencia sobre las barras (viewBox 600x500 = escenario 6:5) */
+  var d = pts.map(function(p,i){ return (i?'L':'M') + (p[0]*6).toFixed(1) + ' ' + (p[1]*5).toFixed(1); }).join(' ');
+  trend.setAttribute('d', d);
+  var last = pts[pts.length-1];
+  dot.style.left = last[0] + '%';
+  dot.style.top  = last[1] + '%';
+
+  /* --- Movimiento --- */
+  function scatter(){
+    var w = stage.clientWidth, h = stage.clientHeight;
+    pieces.forEach(function(p){
+      var o = p.o, pw = o.w/100*w, ph = o.h/100*h;
+      /* Cada pieza se encoge a "ficha" y cae en un punto al azar dentro de la ventana */
+      var longest = Math.max(pw, ph);
+      var sc = Math.min(1, Math.max(.2, rand(.05,.11)*w/longest));
+      var cx = rand(w*.09, w*.91), cy = rand(h*.17, h*.91);
+      var dx = cx - (o.x/100*w + pw/2), dy = cy - (o.y/100*h + ph/2);
+      p.el.style.transitionDelay = '0ms';
+      p.el.style.opacity = rand(.6,.95).toFixed(2);
+      p.el.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' + rand(-40,40).toFixed(1) + 'deg) scale(' + sc.toFixed(2) + ')';
+    });
+  }
+
+  function settle(){
+    stage.classList.add('settled');
+    pieces.forEach(function(p,i){
+      var delay = reduce ? 0 : Math.round(i*20 + rand(0,140));
+      p.el.style.transitionDelay = delay + 'ms';
+      if (p.o.cls === 'stray'){
+        p.el.style.opacity = 0;
+        p.el.style.transform = 'translate(0,0) scale(.2)';
+      } else {
+        p.el.style.opacity = 1;
+        p.el.style.transform = 'translate(0,0) rotate(0deg) scale(1)';
+      }
+    });
+  }
+
+  scatter();
+  if (reduce){
+    settle();
+  } else {
+    void stage.offsetWidth;            /* fija la posición inicial sin animar */
+    stage.classList.remove('init');
+    setTimeout(settle, 700);
+  }
+
+  btn.addEventListener('click', function(){
+    if (busy) return;
+    busy = true; btn.disabled = true;
+    stage.classList.remove('settled');
+    if (reduce){ scatter(); setTimeout(function(){ settle(); busy=false; btn.disabled=false; }, 300); return; }
+    scatter();
+    setTimeout(function(){ settle(); }, 1100);
+    setTimeout(function(){ busy=false; btn.disabled=false; }, 3200);
+  });
+})();
+</script>
 </body>
 </html>
