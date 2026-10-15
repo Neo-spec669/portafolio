@@ -48,6 +48,14 @@
   .mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:20px;height:20px}
   .mark i{border-radius:3px;background:linear-gradient(135deg,var(--cyan),var(--blue))}
   .mark i.a{background:var(--amber)}
+  .who{display:flex;align-items:center;gap:12px;text-align:right}
+  .who b{display:block;font:600 .95rem var(--body);color:var(--text)}
+  .who small{display:block;margin-top:2px;font-size:.82rem;color:var(--muted)}
+  .avatar{
+    display:grid;place-items:center;width:38px;height:38px;border-radius:50%;flex:none;
+    font:800 .95rem var(--display);color:var(--ink);
+    background:linear-gradient(135deg,var(--cyan),var(--blue));
+  }
 
   /* Hero */
   .hero{
@@ -123,6 +131,10 @@
   .cue svg{width:20px;height:20px;stroke:var(--cyan);animation:bob 2.4s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
+  @media (max-width:600px){
+    .top{flex-wrap:wrap;gap:16px}
+    .who{flex-direction:row-reverse;text-align:left}
+  }
   @media (max-width:900px){
     .hero{grid-template-columns:1fr;gap:36px;padding-bottom:110px}
     .stage{max-width:520px;margin:0 auto}
@@ -139,6 +151,10 @@
     <div class="brand">
       <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i class="a"></i></span>
       <span>Centro de herramientas</span>
+    </div>
+    <div class="who">
+      <span><b>Ing. Rodríguez</b><small>Coordinador de Cobranza</small></span>
+      <span class="avatar" aria-hidden="true">R</span>
     </div>
   </header>
 
