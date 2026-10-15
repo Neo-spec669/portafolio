@@ -31,7 +31,7 @@
     position:relative;min-height:760px;display:flex;flex-direction:column;overflow:hidden;
     background:
       radial-gradient(900px 520px at 78% 46%, rgba(52,211,255,.10), transparent 62%),
-      radial-gradient(640px 420px at 6% 100%, rgba(79,128,245,.10), transparent 60%),
+      radial-gradient(560px 300px at 6% 72%, rgba(79,128,245,.10), transparent 60%),
       var(--ink);
   }
   .page::before{
@@ -48,6 +48,14 @@
   .mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:20px;height:20px}
   .mark i{border-radius:3px;background:linear-gradient(135deg,var(--cyan),var(--blue))}
   .mark i.a{background:var(--amber)}
+  .who{display:flex;align-items:center;gap:12px;text-align:right}
+  .who b{display:block;font:600 .95rem var(--body);color:var(--text)}
+  .who small{display:block;margin-top:2px;font-size:.82rem;color:var(--muted)}
+  .avatar{
+    display:grid;place-items:center;width:38px;height:38px;border-radius:50%;flex:none;
+    font:800 .95rem var(--display);color:var(--ink);
+    background:linear-gradient(135deg,var(--cyan),var(--blue));
+  }
 
   /* Hero */
   .hero{
@@ -61,18 +69,17 @@
   }
   .lead{margin-top:24px;max-width:34em;color:var(--muted);font-size:1.125rem;line-height:1.65}
   .replay{
-    margin-top:32px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;
-    padding:12px 20px;border-radius:999px;border:1px solid var(--line);
-    background:rgba(255,255,255,.03);color:var(--text);font:600 .95rem var(--body);
-    transition:border-color .2s, background .2s;
+    margin-top:28px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    padding:6px 2px;border:0;background:none;color:var(--muted);font:500 .9rem var(--body);
+    transition:color .2s;
   }
-  .replay:hover{border-color:var(--cyan);background:rgba(52,211,255,.07)}
+  .replay:hover{color:var(--cyan)}
   .replay:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   .replay:disabled{opacity:.55;cursor:default}
-  .replay svg{width:16px;height:16px}
+  .replay svg{width:15px;height:15px}
 
   /* Escenario: el desorden (ámbar) se convierte en un tablero ordenado (azules) */
-  .stage{position:relative;width:100%;max-width:640px;aspect-ratio:6/5;margin-left:auto}
+  .stage{position:relative;width:100%;max-width:640px;aspect-ratio:6/5;margin-left:auto;cursor:pointer}
   .frame{
     position:absolute;inset:0;border-radius:16px;border:1px solid var(--line);
     background:linear-gradient(180deg,#141c2f,#101728);
@@ -113,11 +120,21 @@
   /* Indicador para seguir bajando (las herramientas están debajo, en SharePoint) */
   .cue{
     position:absolute;left:0;right:0;bottom:22px;z-index:2;pointer-events:none;
-    display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:.9rem;
+    display:flex;justify-content:center;
   }
-  .cue svg{width:22px;height:22px;stroke:var(--cyan);animation:bob 2.4s ease-in-out infinite}
+  .cue span{
+    display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;
+    border:1px solid rgba(52,211,255,.45);background:rgba(52,211,255,.08);
+    color:var(--text);font:600 1rem var(--body);
+    box-shadow:0 10px 30px -12px rgba(52,211,255,.45);
+  }
+  .cue svg{width:20px;height:20px;stroke:var(--cyan);animation:bob 2.4s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
+  @media (max-width:600px){
+    .top{flex-wrap:wrap;gap:16px}
+    .who{flex-direction:row-reverse;text-align:left}
+  }
   @media (max-width:900px){
     .hero{grid-template-columns:1fr;gap:36px;padding-bottom:110px}
     .stage{max-width:520px;margin:0 auto}
@@ -135,6 +152,10 @@
       <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i class="a"></i></span>
       <span>Centro de herramientas</span>
     </div>
+    <div class="who">
+      <span><b>Ing. Rodríguez</b><small>Coordinador de Cobranza</small></span>
+      <span class="avatar" aria-hidden="true">R</span>
+    </div>
   </header>
 
   <main class="hero">
@@ -143,7 +164,7 @@
       <p class="lead">Explora las herramientas que desarrollo para reducir errores, evitar la captura manual y trabajar con mejores datos.</p>
       <button class="replay" id="replay" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
-        Ver cómo se ordena
+        Repetir animación
       </button>
     </div>
 
@@ -157,8 +178,9 @@
   </main>
 
   <div class="cue">
-    <span>Las herramientas están justo debajo</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    <span>Las herramientas están justo debajo
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
   </div>
 </div>
 
@@ -194,7 +216,7 @@
   }
 
   /* --- Composición del tablero final (coordenadas en % del escenario) --- */
-  var kv = ['58%','72%','44%'];
+  var kv = ['36%','76%','54%'];
   for (var k=0;k<3;k++) add({cls:'kpi', x:4+k*31.4, y:15, w:29.2, h:17, fin:'#1b2540', v:kv[k], r:'10px'});
 
   add({cls:'chartbg', x:4, y:35, w:58, h:37, fin:'#151d31', r:'10px'});
@@ -270,7 +292,7 @@
     setTimeout(settle, 700);
   }
 
-  btn.addEventListener('click', function(){
+  function replay(){
     if (busy) return;
     busy = true; btn.disabled = true;
     stage.classList.remove('settled');
@@ -278,7 +300,9 @@
     scatter();
     setTimeout(function(){ settle(); }, 1100);
     setTimeout(function(){ busy=false; btn.disabled=false; }, 3200);
-  });
+  }
+  btn.addEventListener('click', replay);
+  stage.addEventListener('click', replay);
 })();
 </script>
 </body>
